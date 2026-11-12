@@ -64,7 +64,7 @@ function closeLink() {
 async function connect() {
   if (state.busy) return;
   if (!navigator.requestMIDIAccess) {
-    say("plug-status", "This browser can't reach MIDI devices. Use Chrome or Edge on a computer, or Chrome on Android.", "error");
+    say("plug-status", "This browser can't reach MIDI devices. Use Chrome or Edge on a computer, Chrome on Android, or the MIDIWeb app on an iPhone or iPad.", "error");
     return;
   }
   try {
