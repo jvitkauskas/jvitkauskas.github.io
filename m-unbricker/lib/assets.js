@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // What this page carries: m-bootloader's RAM stage packages (from M-Flasher's web page, m-bootloader
 // 2.3, MIT) and m-unbricker for each board.
-import { parsePackage } from "./formats.js";
+import { parsePackage } from "./formats.js?v=20261112212350";
 
 /** Which stage build a firmware's model takes. */
 const VARIANTS = {
