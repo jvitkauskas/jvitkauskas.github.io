@@ -127,7 +127,7 @@ function decide() {
   say("send-status", "");
   go("send");
   if (info && info.canRun) {
-    $("send-text").textContent = `Your ${board === "smk37" ? "SMK-37" : "FM-1"} is ready. This sends M-Unbricker to it: it runs from memory, and nothing is written to the unit.`;
+    $("send-text").textContent = `Found your ${board === "smk37" ? "SMK-37" : "FM-1"}. This sends M-Unbricker to it. Its firmware and settings stay as they are.`;
     buttons(["Send M-Unbricker", sendApp, true]);
   } else if (info) {
     $("send-text").textContent = info.kind === "bootloader"
@@ -141,7 +141,7 @@ function decide() {
     $("send-text").textContent = `Its firmware (${identity}) can't start the helper this page needs. If it has m-bootloader: hold PLAY (SEQ PLAY) while switching it on, choose MIDI MODE, and connect again. Or use another working unit.`;
     buttons(["Back", () => go("plug")]);
   } else {
-    $("send-text").textContent = `Your ${board === "smk37" ? "SMK-37" : "FM-1"} runs ${identity}. First a small helper starts on it, through its own update function: the firmware keeps it in its update area (about 8 KiB) and restarts into it. Your firmware and settings stay. Then M-Unbricker is sent.`;
+    $("send-text").textContent = `Found your ${board === "smk37" ? "SMK-37" : "FM-1"}. First a small helper starts on it, then M-Unbricker is sent. Its firmware and settings stay as they are.`;
     buttons(["Start", startHelper, true]);
   }
 }
