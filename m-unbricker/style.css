@@ -43,3 +43,9 @@ a { color: #b45300; }
   button { background: #2c2c2a; border-color: #4a4a46; }
   a { color: #ffa155; }
 }
+.more { margin-top: 1rem; border-top: 1px solid #d4d4ce; padding-top: 0.75rem; }
+.more summary { cursor: pointer; font-weight: 600; font-size: 1.1rem; color: #b45300; }
+.more-step { margin-top: 1.25rem; }
+.more-step img { max-width: 18rem; }
+.more-step h3 { margin: 0.25rem 0; }
+@media (prefers-color-scheme: dark) { .more summary { color: #ffa155; } }

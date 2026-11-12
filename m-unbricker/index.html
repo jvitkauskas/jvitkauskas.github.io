@@ -54,51 +54,42 @@
   </section>
 
   <!-- 4 -->
-  <section class="step" data-step="move" hidden>
+  <section class="step" data-step="follow" hidden>
     <img src="img/move_cable.png" alt="Unplug from the phone and plug into the broken unit">
-    <h2>Move the cable</h2>
-    <p>The working unit now shows <b>M-Unbricker</b> on its screen. From here on, it guides you.</p>
-    <ol class="do">
-      <li>Press <b class="key-go">PLAY</b> on it to begin.</li>
-      <li><b>Unplug</b> the cable from this phone or computer. Leave it in the working unit.</li>
-      <li>Plug the cable into the <b>broken</b> unit. Keep the broken unit <b>switched off</b> for now.</li>
-      <li>Press <b class="key-go">PLAY</b> after each step on the working unit's screen.</li>
-    </ol>
-    <div class="buttons"><button class="primary" data-go="switch">Next</button></div>
-  </section>
+    <h2>Now follow its screen</h2>
+    <p>M-Unbricker is running on the working unit. <b>From here, its screen guides you</b>, one step at a time: press <b class="key-go">PLAY</b> to go on. You can put this page away.</p>
+    <p class="note">In short: unplug the cable from this phone or computer, plug it into the broken unit while it's switched off, switch it on, and press <b class="key-go">PLAY</b> to repair.</p>
 
-  <!-- 5 -->
-  <section class="step" data-step="switch" hidden>
-    <img src="img/switch_on.png" alt="Switching the broken unit on">
-    <h2>Switch the broken unit on</h2>
-    <p>When the working unit says <b>Switch it on</b>, switch the broken unit on. The working unit wakes it up and connects to it: <i>Waking it up</i>, <i>Connecting</i>, then <i>Found an FM-1</i> or <i>Found an SMK-37</i> while it checks.</p>
-    <p class="note">If it says <i>Switch it off first</i> or <i>No answer</i>: switch the broken unit off, check the cable in both, and press <b class="key-go">PLAY</b> to try again.</p>
-    <div class="buttons"><button data-go="move">Back</button><button class="primary" data-go="play">Next</button></div>
-  </section>
-
-  <!-- 6 -->
-  <section class="step" data-step="play" hidden>
-    <img src="img/press_play.png" alt="Pressing PLAY on the working unit">
-    <h2>Press <span class="key-go">PLAY</span> to repair</h2>
-    <p>At <b>Ready to repair</b>, press <b class="key-go">PLAY</b> on the working unit. The broken unit gets a fresh bootloader (m-bootloader) and a small starter firmware. On an SMK-37 its calibration is kept.</p>
-    <p class="note">To stop here without changing anything, press <b class="key-no">OCT−</b> instead.</p>
-    <div class="buttons"><button data-go="switch">Back</button><button class="primary" data-go="working">Next</button></div>
-  </section>
-
-  <!-- 7 -->
-  <section class="step" data-step="working" hidden>
-    <img src="img/working.png" alt="Both units connected while repairing">
-    <h2>Keep both on</h2>
-    <p>While it says <b>Repairing</b>, keep both units switched on and connected. It takes under a minute.</p>
-    <div class="buttons"><button data-go="play">Back</button><button class="primary" data-go="done">Next</button></div>
-  </section>
-
-  <!-- 8 -->
-  <section class="step" data-step="done" hidden>
-    <img src="img/success.png" alt="The repaired unit lit up again">
-    <h2>Done!</h2>
-    <p>When the working unit says <b>Done!</b>, the repaired unit restarts with a small starter firmware that plays when you press its keys. Press <b class="key-go">PLAY</b> on the working unit to send it back to its own firmware.</p>
-    <p>Now install any firmware you like on the repaired one, with <a href="../m-flasher/">M-Flasher</a> or your firmware's own installer. Its new bootloader, m-bootloader, also has a recovery menu: hold <b>PLAY</b> (<b>SEQ PLAY</b> on the SMK-37) while switching it on.</p>
+    <details class="more">
+      <summary>Step by step, in more detail</summary>
+      <div class="more-step">
+        <img src="img/move_cable.png" alt="">
+        <h3>1. Move the cable</h3>
+        <p>Press <b class="key-go">PLAY</b> on the working unit. Unplug the cable from this phone or computer and leave it in the working unit. Plug the other end into the <b>broken</b> unit, and keep that one <b>switched off</b> for now.</p>
+      </div>
+      <div class="more-step">
+        <img src="img/switch_on.png" alt="">
+        <h3>2. Switch the broken unit on</h3>
+        <p>When the working unit says <b>Switch it on</b>, switch the broken unit on. The working unit wakes it up and connects: <i>Waking it up</i>, <i>Connecting</i>, then <i>Found an FM-1</i> or <i>Found an SMK-37</i> while it checks.</p>
+        <p class="note">If it says <i>Switch it off first</i> or <i>No answer</i>: switch the broken unit off, check the cable in both, and press <b class="key-go">PLAY</b> to try again.</p>
+      </div>
+      <div class="more-step">
+        <img src="img/press_play.png" alt="">
+        <h3>3. Press <span class="key-go">PLAY</span> to repair</h3>
+        <p>At <b>Ready to repair</b>, press <b class="key-go">PLAY</b>. The broken unit gets a fresh bootloader (m-bootloader) and a small starter firmware. On an SMK-37 its calibration is kept. To stop without changing anything, press <b class="key-no">OCT−</b> instead.</p>
+      </div>
+      <div class="more-step">
+        <img src="img/working.png" alt="">
+        <h3>4. Keep both on</h3>
+        <p>While it says <b>Repairing</b>, keep both units switched on and connected. It takes under a minute.</p>
+      </div>
+      <div class="more-step">
+        <img src="img/success.png" alt="">
+        <h3>5. Done</h3>
+        <p>At <b>Done!</b> the repaired unit restarts with a small starter firmware that plays when you press its keys. Press <b class="key-go">PLAY</b> on the working unit to send it back to its own firmware.</p>
+        <p>Then install any firmware you like on the repaired one, with <a href="../m-flasher/">M-Flasher</a> or your firmware's own installer. Its new bootloader, m-bootloader, also has a recovery menu: hold <b>PLAY</b> (<b>SEQ PLAY</b> on the SMK-37) while switching it on.</p>
+      </div>
+    </details>
     <div class="buttons"><button data-go="intro">Repair another one</button></div>
   </section>
 

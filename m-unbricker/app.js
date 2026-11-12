@@ -218,7 +218,7 @@ async function sendApp() {
       onProgress: (done, total) => progress(done, total, `Sending M-Unbricker: ${Math.round((done * 100) / total)}%`),
     });
     closeLink();
-    go("move");
+    go("follow");
   } catch (cause) {
     say("send-status", cause.message, "error");
     buttons(["Try again", sendApp, true]);
