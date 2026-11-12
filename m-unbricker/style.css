@@ -49,3 +49,8 @@ a { color: #b45300; }
 .more-step img { max-width: 18rem; }
 .more-step h3 { margin: 0.25rem 0; }
 @media (prefers-color-scheme: dark) { .more summary { color: #ffa155; } }
+#support { background: var(--card); border-radius: 1rem; padding: 0.75rem 1.25rem 1.25rem; margin: 1.25rem 0; }
+#support h2 { font-size: 1.2rem; margin: 0.25rem 0; }
+#support .buttons { justify-content: flex-start; margin-top: 0.75rem; }
+a.button { display: inline-block; text-decoration: none; font-size: 1.05rem; padding: 0.6rem 1.2rem; border-radius: 0.75rem; border: 2px solid var(--accent); color: var(--ink); font-weight: 600; }
+a.button:hover { background: var(--accent); color: #fff; }
