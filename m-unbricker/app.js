@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 // M-Unbricker's page: a wizard that starts M-Unbricker on a working FM-1 or SMK-37 over USB MIDI, then
 // guides the user while the working unit repairs the broken one (it shows its own steps on screen).
-import { FINISH, Link, Unit, UnitLost, findPorts } from "./lib/protocol.js?v=20261112223342";
-import { hasOwnUpdater, loadStage, loadUnbricker, variantOf } from "./lib/assets.js?v=20261112223342";
+import { FINISH, Link, Unit, UnitLost, findPorts } from "./lib/protocol.js?v=20261112225029";
+import { hasOwnUpdater, loadStage, loadUnbricker, variantOf } from "./lib/assets.js?v=20261112225029";
 
 const $ = (id) => document.getElementById(id);
 const STEPS = [...document.querySelectorAll(".step")].map((s) => s.dataset.step);
