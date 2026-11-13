@@ -20,7 +20,12 @@ export const SMK37 = {
 };
 export const BOARDS = [FM1, SMK37];
 
-export const flashTested = (id) => BOARDS.some((b) => b.flashId === id);
+export const flashTested = (id) => BOARDS.some((b) => b.flashId === id || b.otherFlash.includes(id));
+
+// The flash chip's ID as shown, with which of the FM-1's two chips it is: firmware written
+// before the newer one came may not work on it (not save, say).
+export const flashText = (id) =>
+  hex(id, 6) + (id === FM1.flashId ? " (old)" : FM1.otherFlash.includes(id) ? " (new)" : "");
 
 const matches = (flash, at, text) => {
   const bytes = new TextEncoder().encode(text);
@@ -75,7 +80,7 @@ export function analyse(flash, flashId, key) {
     || (region("VM") === 0xba000 && region("SEQ64") === 0xda000 && region("BTIF") === 0xec000)) {
     evidence.push([FM1, false, "the firmware uses the FM-1 flash layout"]);
   }
-  if (flashId != null) for (const b of BOARDS) if (flashId === b.flashId || b.otherFlash.includes(flashId)) evidence.push([b, false, `flash chip ${hex(flashId, 6)}`]);
+  if (flashId != null) for (const b of BOARDS) if (flashId === b.flashId || b.otherFlash.includes(flashId)) evidence.push([b, false, `flash chip ${flashText(flashId)}`]);
   const keys = (strong) => [...new Set(evidence.filter((e) => e[1] === strong).map((e) => e[0].key))];
   const strong = keys(true);
   const weak = keys(false);
@@ -192,7 +197,7 @@ export function planRestore(session, data, backupUnit) {
 }
 
 /** Installing firmware from a package, as M-Flasher's window does. */
-export function planFirmware(session, raw, wipeSettings) {
+export function planFirmware(session, raw) {
   const { flash, analysis, key } = session;
   const board = analysis.board;
   if (!board) throw refuse("the model of this unit is not certain, so nothing can be written from here");
@@ -217,17 +222,5 @@ export function planFirmware(session, raw, wipeSettings) {
   target.set(pkgFlash.subarray(BOOT_AREA), BOOT_AREA);
   for (const [a, b] of board.keep) target.set(flash.subarray(a, b), a);
   notes.push(`Installs ${pkg.identity} (${rangesText([[BOOT_AREA, pkgFlash.length]])}). The bootloader stays as it is.`);
-  if (wipeSettings) {
-    for (const e of appTable(padded, key)) {
-      if ((e.name !== "VM" && e.name !== "BTIF") || (e.attr !== 0x12 && e.attr !== 0x92) || !e.len || e.addr % SECTOR || e.addr + e.len > FLASH_SIZE) continue;
-      if (board.factory.some(([a, b]) => a < e.addr + e.len && e.addr < b)) throw refuse(`the package declares ${e.name} over factory data`);
-      if (inAny(board.keep, e.addr)) {
-        notes.push(`${e.name} is left as it is: MIDI mode keeps it.`);
-        continue;
-      }
-      target.fill(0xff, e.addr, e.addr + e.len);
-      notes.push(`Erases ${e.name} (${rangesText([[e.addr, e.addr + e.len]])}): ${e.name === "VM" ? "settings" : "Bluetooth pairings"}`);
-    }
-  }
   return makePlan(`Install firmware ${pkg.identity}`, flash, target, board, notes, warnings);
 }
