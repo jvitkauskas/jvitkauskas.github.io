@@ -4,30 +4,89 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>M-Flasher</title>
-<meta name="description" content="Back up, restore and reinstall the firmware of an M-VAVE FM-1 or SMK-37 Pro / Elite, and install m-bootloader. For Windows, macOS and Linux, and in a browser.">
+<meta name="description" content="Back up, restore and reinstall the firmware of an M-VAVE FM-1 or SMK-37 Pro / Elite, and install m-bootloader. Free, for Windows, macOS and Linux.">
 <link rel="icon" href="web/assets/icon-256.png">
 <style>
-  :root { color-scheme: dark; --bg: #16181d; --panel: #20242b; --line: #343a44; --text: #e8ebf0; --dim: #a5adba; --accent: #7fe0b5; }
+  :root { color-scheme: dark; --bg: #16181d; --panel: #20242b; --panel2: #272c34; --line: #343a44; --text: #e8ebf0; --dim: #a5adba; --accent: #7fe0b5; --accent2: #5fd0a0; }
   * { box-sizing: border-box; }
-  body { margin: 0 auto; max-width: 52rem; padding: 1.25rem; background: var(--bg); color: var(--text); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-  header img { width: 64px; height: 64px; }
-  h1 { margin: 0; font-size: 1.9rem; letter-spacing: -0.01em; }
-  header p { margin: 0.2rem 0 0; color: var(--dim); }
-  .shot { display: block; width: 100%; height: auto; margin: 0 0 1rem; border: 1px solid var(--line); border-radius: 8px; }
-  .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 0.9rem; }
-  section { display: flex; flex-direction: column; padding: 1rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
-  h2 { margin: 0 0 0.4rem; font-size: 1.15rem; }
-  h2 span { color: var(--dim); font-weight: 400; font-size: 0.95rem; }
-  p, ul { margin: 0 0 0.7rem; }
-  ul { padding-left: 1.2rem; color: var(--dim); }
-  .button { align-self: flex-start; margin-top: auto; padding: 0.55rem 1.1rem; color: #10131a; background: var(--accent); border-radius: 6px; font-weight: 600; text-decoration: none; }
-  .button:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
-  footer { margin-top: 1.2rem; color: var(--dim); font-size: 0.9rem; }
+  body { margin: 0 auto; max-width: 54rem; padding: 1.25rem; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   a { color: var(--accent); }
+  .icon { width: 1em; height: 1em; fill: currentColor; flex: none; }
+  header { display: flex; align-items: center; gap: 1rem; }
+  header > img { width: 72px; height: 72px; }
+  h1 { margin: 0; font-size: 2.1rem; letter-spacing: -0.01em; line-height: 1.15; }
+  header p { margin: 0.25rem 0 0; color: var(--dim); }
+  .hero { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.2rem; margin: 1.4rem 0 1.2rem; }
+  .download { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.95rem 1.8rem; color: #0d1712; background: var(--accent); border: 0; border-radius: 10px;
+              font: inherit; font-size: 1.3rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 24px rgba(127, 224, 181, 0.25); transition: background 0.15s, transform 0.15s; }
+  .download:hover { background: var(--accent2); transform: translateY(-1px); }
+  .download .icon { width: 1.3em; height: 1.3em; }
+  .hero p { margin: 0; color: var(--dim); }
+  .hero p strong { color: var(--text); font-weight: 600; }
+  .shot { display: block; width: 100%; height: auto; margin: 0 0 1.2rem; border: 1px solid var(--line); border-radius: 8px; }
+  section { margin: 0 0 1rem; padding: 1rem 1.2rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+  h2 { margin: 0 0 0.5rem; font-size: 1.2rem; }
+  section p { margin: 0 0 0.7rem; }
+  ul { margin: 0; padding-left: 1.2rem; }
+  li { margin: 0.15rem 0; }
+  li strong { font-weight: 600; }
+  .support-links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .support-links a { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.1rem; color: var(--text); background: var(--panel2); border: 1px solid var(--line);
+                     border-radius: 8px; font-weight: 600; text-decoration: none; }
+  .support-links a:hover { border-color: var(--accent); }
+  .support-links .icon { color: #f37a9a; }
+  footer { margin-top: 1.4rem; color: var(--dim); font-size: 0.85rem; }
+  footer p { margin: 0.3rem 0; }
+
+  dialog { width: min(40rem, 94vw); max-height: 92vh; padding: 0; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+  dialog::backdrop { background: rgba(0, 0, 0, 0.65); }
+  .dlg { padding: 1.2rem 1.3rem 1.3rem; }
+  .dlg-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.8rem; }
+  .dlg-head h2 { margin: 0; font-size: 1.35rem; }
+  .dlg-head p { margin: 0.15rem 0 0; color: var(--dim); font-size: 0.92rem; }
+  .close { flex: none; width: 2.2rem; height: 2.2rem; color: var(--dim); background: none; border: 1px solid var(--line); border-radius: 8px; font-size: 1.3rem; line-height: 1; cursor: pointer; }
+  .close:hover { color: var(--text); }
+  h3 { margin: 1rem 0 0.5rem; color: var(--dim); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .options { display: grid; gap: 0.55rem; }
+  .option { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; color: var(--text); background: var(--panel2); border: 1px solid var(--line);
+            border-radius: 10px; text-decoration: none; transition: border-color 0.15s, background 0.15s; }
+  .option:hover, .option:focus-visible { border-color: var(--accent); background: #2c333c; outline: none; }
+  .option .icon { width: 2.4rem; height: 2.4rem; }
+  .option .text { flex: 1; min-width: 0; }
+  .option .title { display: block; font-size: 1.12rem; font-weight: 650; }
+  .option .detail { display: block; color: var(--dim); font-size: 0.9rem; }
+  .option .kind { flex: none; padding: 0.2rem 0.55rem; color: var(--dim); border: 1px solid var(--line); border-radius: 6px; font: 0.85rem ui-monospace, Menlo, Consolas, monospace; }
+  .options.recommended .option { padding: 1.1rem 1.15rem; border-color: #3f6f5b; background: #24342e; }
+  .options.recommended .option:hover, .options.recommended .option:focus-visible { border-color: var(--accent); background: #29403a; }
+  .options.recommended .option .icon { width: 2.9rem; height: 2.9rem; color: var(--accent); }
+  .options.recommended .option .title { font-size: 1.25rem; }
+  details { margin-top: 0.4rem; }
+  summary { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "▸"; color: var(--dim); font-size: 0.9rem; transition: transform 0.15s; }
+  details[open] > summary::before { transform: rotate(90deg); }
+  summary h3 { margin: 0.6rem 0; }
+  summary:hover h3, summary:focus-visible h3 { color: var(--text); }
+  summary:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 4px; }
+  #dl-others-wrap[open] .options { margin-bottom: 0.2rem; }
+  .note { margin: 0.2rem 0 0; color: var(--dim); font-size: 0.92rem; }
+  .next { margin-top: 1rem; padding: 0.9rem 1rem; background: #24342e; border: 1px solid #3f6f5b; border-radius: 10px; }
+  .next h3 { margin: 0 0 0.4rem; color: var(--accent); }
+  .next p { margin: 0 0 0.5rem; }
+  .next p:last-child { margin: 0; }
+  code { padding: 0.05rem 0.3rem; background: #15181d; border-radius: 4px; font: 0.88em ui-monospace, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+  [hidden] { display: none !important; }
 </style>
 </head>
 <body>
+<svg hidden>
+  <symbol id="i-windows" viewBox="0 0 448 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc. --><path fill="currentColor" d="M0 93.7l183.6-25.3 0 177.4-183.6 0 0-152.1zM0 418.3l183.6 25.3 0-175.2-183.6 0 0 149.9zm203.8 28l244.2 33.7 0-211.6-244.2 0 0 177.9zm0-380.6l0 180.1 244.2 0 0-213.8-244.2 33.7z"/></symbol>
+  <symbol id="i-apple" viewBox="0 0 24 24"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></symbol>
+  <symbol id="i-linux" viewBox="0 0 24 24"><path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587-.003 1.23-.269 2.26-.334.699-.058 1.574.267 2.577.2.025.134.063.198.114.333l.003.003c.391.778 1.113 1.132 1.884 1.071.771-.06 1.592-.536 2.257-1.306.631-.765 1.683-1.084 2.378-1.503.348-.199.629-.469.649-.853.023-.4-.2-.811-.714-1.376v-.097l-.003-.003c-.17-.2-.25-.535-.338-.926-.085-.401-.182-.786-.492-1.046h-.003c-.059-.054-.123-.067-.188-.135a.357.357 0 00-.19-.064c.431-1.278.264-2.55-.173-3.694-.533-1.41-1.465-2.638-2.175-3.483-.796-1.005-1.576-1.957-1.56-3.368.026-2.152.236-6.133-3.544-6.139zm.529 3.405h.013c.213 0 .396.062.584.198.19.135.33.332.438.533.105.259.158.459.166.724 0-.02.006-.04.006-.06v.105a.086.086 0 01-.004-.021l-.004-.024a1.807 1.807 0 01-.15.706.953.953 0 01-.213.335.71.71 0 00-.088-.042c-.104-.045-.198-.064-.284-.133a1.312 1.312 0 00-.22-.066c.05-.06.146-.133.183-.198.053-.128.082-.264.088-.402v-.02a1.21 1.21 0 00-.061-.4c-.045-.134-.101-.2-.183-.333-.084-.066-.167-.132-.267-.132h-.016c-.093 0-.176.03-.262.132a.8.8 0 00-.205.334 1.18 1.18 0 00-.09.4v.019c.002.089.008.179.02.267-.193-.067-.438-.135-.607-.202a1.635 1.635 0 01-.018-.2v-.02a1.772 1.772 0 01.15-.768c.082-.22.232-.406.43-.533a.985.985 0 01.594-.2zm-2.962.059h.036c.142 0 .27.048.399.135.146.129.264.288.344.465.09.199.14.4.153.667v.004c.007.134.006.2-.002.266v.08c-.03.007-.056.018-.083.024-.152.055-.274.135-.393.2.012-.09.013-.18.003-.267v-.015c-.012-.133-.04-.2-.082-.333a.613.613 0 00-.166-.267.248.248 0 00-.183-.064h-.021c-.071.006-.13.04-.186.132a.552.552 0 00-.12.27.944.944 0 00-.023.33v.015c.012.135.037.2.08.334.046.134.098.2.166.268.01.009.02.018.034.024-.07.057-.117.07-.176.136a.304.304 0 01-.131.068 2.62 2.62 0 01-.275-.402 1.772 1.772 0 01-.155-.667 1.759 1.759 0 01.08-.668 1.43 1.43 0 01.283-.535c.128-.133.26-.2.418-.2zm1.37 1.706c.332 0 .733.065 1.216.399.293.2.523.269 1.052.468h.003c.255.136.405.266.478.399v-.131a.571.571 0 01.016.47c-.123.31-.516.643-1.063.842v.002c-.268.135-.501.333-.775.465-.276.135-.588.292-1.012.267a1.139 1.139 0 01-.448-.067 3.566 3.566 0 01-.322-.198c-.195-.135-.363-.332-.612-.465v-.005h-.005c-.4-.246-.616-.512-.686-.71-.07-.268-.005-.47.193-.6.224-.135.38-.271.483-.336.104-.074.143-.102.176-.131h.002v-.003c.169-.202.436-.47.839-.601.139-.036.294-.065.466-.065zm2.8 2.142c.358 1.417 1.196 3.475 1.735 4.473.286.534.855 1.659 1.102 3.024.156-.005.33.018.513.064.646-1.671-.546-3.467-1.089-3.966-.22-.2-.232-.335-.123-.335.59.534 1.365 1.572 1.646 2.757.13.535.16 1.104.021 1.67.067.028.135.06.205.067 1.032.534 1.413.938 1.23 1.537v-.043c-.06-.003-.12 0-.18 0h-.016c.151-.467-.182-.825-1.065-1.224-.915-.4-1.646-.336-1.77.465-.008.043-.013.066-.018.135-.068.023-.139.053-.209.064-.43.268-.662.669-.793 1.187-.13.533-.17 1.156-.205 1.869v.003c-.02.334-.17.838-.319 1.35-1.5 1.072-3.58 1.538-5.348.334a2.645 2.645 0 00-.402-.533 1.45 1.45 0 00-.275-.333c.182 0 .338-.03.465-.067a.615.615 0 00.314-.334c.108-.267 0-.697-.345-1.163-.345-.467-.931-.995-1.788-1.521-.63-.4-.986-.87-1.15-1.396-.165-.534-.143-1.085-.015-1.645.245-1.07.873-2.11 1.274-2.763.107-.065.037.135-.408.974-.396.751-1.14 2.497-.122 3.854a8.123 8.123 0 01.647-2.876c.564-1.278 1.743-3.504 1.836-5.268.048.036.217.135.289.202.218.133.38.333.59.465.21.201.477.335.876.335.039.003.075.006.11.006.412 0 .73-.134.997-.268.29-.134.52-.334.74-.4h.005c.467-.135.835-.402 1.044-.7zm2.185 8.958c.037.6.343 1.245.882 1.377.588.134 1.434-.333 1.791-.765l.211-.01c.315-.007.577.01.847.268l.003.003c.208.199.305.53.391.876.085.4.154.78.409 1.066.486.527.645.906.636 1.14l.003-.007v.018l-.003-.012c-.015.262-.185.396-.498.595-.63.401-1.746.712-2.457 1.57-.618.737-1.37 1.14-2.036 1.191-.664.053-1.237-.2-1.574-.898l-.005-.003c-.21-.4-.12-1.025.056-1.69.176-.668.428-1.344.463-1.897.037-.714.076-1.335.195-1.814.12-.465.308-.797.641-.984l.045-.022zm-10.814.049h.01c.053 0 .105.005.157.014.376.055.706.333 1.023.752l.91 1.664.003.003c.243.533.754 1.064 1.189 1.637.434.598.77 1.131.729 1.57v.006c-.057.744-.48 1.148-1.125 1.294-.645.135-1.52.002-2.395-.464-.968-.536-2.118-.469-2.857-.602-.369-.066-.61-.2-.723-.4-.11-.2-.113-.602.123-1.23v-.004l.002-.003c.117-.334.03-.752-.027-1.118-.055-.401-.083-.71.043-.94.16-.334.396-.4.69-.533.294-.135.64-.202.915-.47h.002v-.002c.256-.268.445-.601.668-.838.19-.201.38-.336.663-.336zm7.159-9.074c-.435.201-.945.535-1.488.535-.542 0-.97-.267-1.28-.466-.154-.134-.28-.268-.373-.335-.164-.134-.144-.333-.074-.333.109.016.129.134.199.2.096.066.215.2.36.333.292.2.68.467 1.167.467.485 0 1.053-.267 1.398-.466.195-.135.445-.334.648-.467.156-.136.149-.267.279-.267.128.016.034.134-.147.332a8.097 8.097 0 01-.69.468zm-1.082-1.583V5.64c-.006-.02.013-.042.029-.05.074-.043.18-.027.26.004.063 0 .16.067.15.135-.006.049-.085.066-.135.066-.055 0-.092-.043-.141-.068-.052-.018-.146-.008-.163-.065zm-.551 0c-.02.058-.113.049-.166.066-.047.025-.086.068-.14.068-.05 0-.13-.02-.136-.068-.01-.066.088-.133.15-.133.08-.031.184-.047.259-.005.019.009.036.03.03.05v.02h.003z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M11 3h2v9.6l3.3-3.3 1.4 1.4L12 16.4l-5.7-5.7 1.4-1.4 3.3 3.3V3zM5 18h14v2H5z"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21.2l-1.4-1.3C5.4 15.2 2 12.1 2 8.4 2 5.3 4.4 3 7.4 3c1.7 0 3.4.8 4.6 2.1C13.2 3.8 14.9 3 16.6 3 19.6 3 22 5.3 22 8.4c0 3.7-3.4 6.8-8.6 11.5L12 21.2z"/></symbol>
+</svg>
+
 <header>
   <img src="web/assets/icon-256.png" alt="">
   <div>
@@ -35,31 +94,64 @@
     <p>Back up, restore and reinstall the firmware of an M-VAVE FM-1 or SMK-37 Pro / Elite, and install m-bootloader.</p>
   </div>
 </header>
-<img class="shot" src="screenshot.jpg" width="1280" height="853" alt="M-Flasher connected to an FM-1 in download mode, with m-bootloader installed: the device panel, the operations and the flash map">
-<div class="choices">
-  <section>
-    <h2>On a computer <span>Windows, macOS, Linux</span></h2>
-    <p>Talks to the chip's built-in USB download mode, so it also works when the firmware on the unit is broken.</p>
-    <ul>
-      <li>Back up and restore the whole flash</li>
-      <li>Install firmware from <code>.fwsc</code> packages</li>
-      <li>Install m-bootloader, or put the stock bootloader back</li>
-    </ul>
-    <a class="button" href="https://github.com/jvitkauskas/m-flasher/releases/latest">Download</a>
-  </section>
-  <section>
-    <h2>In a browser <span>experimental beta</span></h2>
-    <p>Over USB MIDI, from a computer or a phone, with nothing to install. Works through the unit's running firmware, or m-bootloader's MIDI mode.</p>
-    <ul>
-      <li>Back up, restore and install firmware</li>
-      <li>Install m-bootloader through the firmware's update</li>
-      <li>Chrome, Edge, Brave or Firefox; on iOS, an app with Web MIDI</li>
-    </ul>
-    <a class="button" href="web/">Open in the browser</a>
-  </section>
+
+<div class="hero">
+  <button class="download" id="download" type="button"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Download M-Flasher</button>
+  <p><strong>Free</strong> for Windows, macOS and Linux<span id="hero-version"></span></p>
 </div>
+
+<img class="shot" src="screenshot.jpg" width="1280" height="853" alt="M-Flasher connected to an FM-1 in download mode, with m-bootloader installed: the device panel, the operations and the flash map">
+
+<section>
+  <h2>What it does</h2>
+  <p>It talks to the chip's built-in USB download mode, so it also works when the firmware on the unit is broken.</p>
+  <ul>
+    <li><strong>Back up</strong> the whole flash, and <strong>restore</strong> a backup.</li>
+    <li><strong>Install firmware</strong> from <code>.fwsc</code> packages, as downloaded.</li>
+    <li><strong>Install m-bootloader</strong>, or put the stock one back.</li>
+    <li>A <strong>flash map</strong> shows what each part of the flash holds and, before a write, exactly what will change.</li>
+    <li>Checks the package is for this model, writes only what changes, and verifies everything written.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Support</h2>
+  <p>M-Flasher is free. Its apps aren't signed yet: that's why Windows and macOS ask for an extra confirmation the first time. Signing for macOS needs Apple's developer program, $99 every year: donations go to that first, and what's left after a year's signing goes to the next.</p>
+  <div class="support-links">
+    <a href="https://github.com/sponsors/jvitkauskas"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Sponsor on GitHub</a>
+    <a href="https://ko-fi.com/jvitkauskas"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Donate on Ko-fi</a>
+  </div>
+</section>
+
 <footer>
-  Free and open source: <a href="https://github.com/jvitkauskas/m-flasher">github.com/jvitkauskas/m-flasher</a>. Not affiliated with M-VAVE or JieLi.
+  <p>Free and open source (MIT): <a href="https://github.com/jvitkauskas/m-flasher">github.com/jvitkauskas/m-flasher</a>. Not affiliated with M-VAVE or JieLi.</p>
+  <p>The logos are their owners' trademarks, shown only to say which system each download is for. Windows logo: <a href="https://fontawesome.com/license/free">Font Awesome Free</a>, CC BY 4.0; Apple logo and Tux: <a href="https://simpleicons.org/">Simple Icons</a>, CC0.</p>
 </footer>
+
+<dialog id="downloads" aria-labelledby="dl-title">
+  <div class="dlg">
+    <div class="dlg-head">
+      <div>
+        <h2 id="dl-title">Download M-Flasher</h2>
+        <p id="dl-sub">The latest release</p>
+      </div>
+      <button class="close" id="dl-close" type="button" aria-label="Close">×</button>
+    </div>
+    <p class="note" id="dl-mobile" hidden>M-Flasher runs on a computer with Windows, macOS or Linux. Choose the one you'll connect the unit to.</p>
+    <div id="dl-recommended-wrap" hidden>
+      <h3 id="dl-recommended-label">For this computer</h3>
+      <div class="options recommended" id="dl-recommended"></div>
+    </div>
+    <details id="dl-others-wrap">
+      <summary><h3 id="dl-others-label">Other systems</h3></summary>
+      <div class="options" id="dl-others"></div>
+    </details>
+    <div class="next" id="dl-next" hidden aria-live="polite"></div>
+    <p class="note" id="dl-fallback" hidden>Couldn't reach GitHub for the file list: the buttons open the release page, where the same files are.</p>
+    <p class="note" style="margin-top:1rem">All files, with checksums and release notes: <a id="dl-release" href="https://github.com/jvitkauskas/m-flasher/releases/latest">the release on GitHub</a>.</p>
+  </div>
+</dialog>
+
+<script src="landing.js"></script>
 </body>
 </html>
