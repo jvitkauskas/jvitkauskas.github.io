@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 // M-Unbricker's page: a wizard that starts M-Unbricker on a working FM-1 or SMK-37 over USB MIDI, then
 // guides the user while the working unit repairs the broken one (it shows its own steps on screen).
-import { FINISH, Link, Unit, UnitLost, findPorts } from "./lib/protocol.js?v=20261113020116";
-import { hasOwnUpdater, loadStage, loadUnbricker, variantOf } from "./lib/assets.js?v=20261113020116";
+import { FINISH, Link, Unit, UnitLost, findPorts } from "./lib/protocol.js?v=20261113023247";
+import { hasOwnUpdater, loadStage, loadUnbricker, variantOf } from "./lib/assets.js?v=20261113023247";
 
 const $ = (id) => document.getElementById(id);
 const STEPS = [...document.querySelectorAll(".step")].map((s) => s.dataset.step);
@@ -232,5 +232,15 @@ $("connect").addEventListener("click", connect);
 $("port-select").addEventListener("change", () => {
   const port = findPorts(state.access)[Number($("port-select").value)];
   if (port) open(port);
+});
+// Links into the troubleshooting notes open the collapsed section first (Safari doesn't by itself).
+document.addEventListener("click", (event) => {
+  const link = event.target.closest('a[href^="#"]');
+  const target = link && document.getElementById(link.getAttribute("href").slice(1));
+  if (!target) return;
+  const details = target.closest("details");
+  if (details) details.open = true;
+  event.preventDefault();
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 go("intro");
