@@ -21,6 +21,9 @@
               font: inherit; font-size: 1.3rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 24px rgba(127, 224, 181, 0.25); transition: background 0.15s, transform 0.15s; }
   .download:hover { background: var(--accent2); transform: translateY(-1px); }
   .download .icon { width: 1.3em; height: 1.3em; }
+  .guide-link { display: inline-flex; align-items: center; padding: 0.95rem 1.4rem; color: var(--text); background: var(--panel2); border: 1px solid var(--line);
+                border-radius: 10px; font-size: 1.1rem; font-weight: 650; text-decoration: none; }
+  .guide-link:hover { border-color: var(--accent); }
   .hero p { margin: 0; color: var(--dim); }
   .hero p strong { color: var(--text); font-weight: 600; }
   .shot { display: block; width: 100%; height: auto; margin: 0 0 1.2rem; border: 1px solid var(--line); border-radius: 8px; }
@@ -97,6 +100,7 @@
 
 <div class="hero">
   <button class="download" id="download" type="button"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Download M-Flasher</button>
+  <a class="guide-link" href="guide/">How to use it</a>
   <p><strong>Free</strong> for Windows, macOS and Linux<span id="hero-version"></span></p>
 </div>
 

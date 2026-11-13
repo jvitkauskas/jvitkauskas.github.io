@@ -107,7 +107,7 @@ function showNext(link, option, file) {
   const next = $("dl-next");
   link.after(next);
   next.innerHTML = `<h3>After the download</h3>` + steps.map((s) => `<p>${s}</p>`).join("")
-    + `<p>Then put the unit in download mode and connect it: M-Flasher shows how. More in the <a href="https://github.com/${REPO}/blob/main/docs/usage.md">usage guide</a>.</p>`;
+    + `<p>Then <a href="guide/#connect">connect your unit</a> in download mode: M-Flasher shows how. Step by step: <a href="guide/#install-${{ windows: "windows", mac: "mac" }[option.os] || "linux"}">the guide</a>.</p>`;
   next.hidden = false;
   next.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
@@ -142,6 +142,9 @@ $("download").addEventListener("click", async () => {
 });
 $("dl-close").addEventListener("click", () => dialog.close());
 dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); }); // outside it
+
+// The guide's Download links here
+if (location.hash === "#download") $("download").click();
 
 // The version under the button
 latestRelease().then((rel) => {

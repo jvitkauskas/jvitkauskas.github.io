@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to use M-Flasher</title>
+<meta name="description" content="A step-by-step guide to M-Flasher: install it, connect your FM-1 or SMK-37, make a backup, install firmware and m-bootloader, and go back.">
+<link rel="icon" href="../web/assets/icon-256.png">
+<style>
+  :root { color-scheme: dark; --bg: #16181d; --panel: #20242b; --panel2: #272c34; --line: #343a44; --text: #e8ebf0; --dim: #a5adba; --accent: #7fe0b5; --warn: #ffb648; }
+  * { box-sizing: border-box; }
+  body { margin: 0 auto; max-width: 46rem; padding: 1.25rem; background: var(--bg); color: var(--text); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  a { color: var(--accent); }
+  nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; font-size: 0.95rem; }
+  nav a { text-decoration: none; }
+  nav .get { padding: 0.45rem 0.95rem; color: #0d1712; background: var(--accent); border-radius: 8px; font-weight: 700; }
+  h1 { margin: 0 0 0.3rem; font-size: 2rem; line-height: 1.2; }
+  .lead { margin: 0 0 1.2rem; color: var(--dim); }
+  .toc { margin: 0 0 1.4rem; padding: 0.8rem 1.1rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+  .toc ol { margin: 0; padding-left: 1.3rem; columns: 2 15rem; }
+  section { margin: 0 0 1.1rem; padding: 1.05rem 1.25rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; scroll-margin-top: 1rem; }
+  h2 { margin: 0 0 0.6rem; font-size: 1.35rem; line-height: 1.3; }
+  h2 .n { display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; margin-right: 0.55rem; color: #0d1712; background: var(--accent); border-radius: 50%; font-size: 1rem; vertical-align: 0.12rem; }
+  h3 { margin: 1rem 0 0.4rem; font-size: 1.08rem; }
+  p { margin: 0 0 0.7rem; }
+  ol, ul { margin: 0 0 0.7rem; padding-left: 1.4rem; }
+  li { margin: 0.25rem 0; }
+  section > :last-child { margin-bottom: 0; }
+  .ui { padding: 0.05rem 0.35rem; color: var(--text); background: #2f4a3f; border: 1px solid #3f6f5b; border-radius: 4px; font-size: 0.88em; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; }
+  kbd { padding: 0.05rem 0.4rem; background: var(--panel2); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; font: 600 0.88em system-ui, sans-serif; }
+  code { padding: 0.05rem 0.3rem; background: #15181d; border-radius: 4px; font: 0.86em ui-monospace, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+  .tip, .warn { margin: 0.8rem 0 0; padding: 0.65rem 0.9rem; border-radius: 8px; }
+  .tip { background: #24342e; border: 1px solid #3f6f5b; }
+  .warn { background: #33291b; border: 1px solid #6b5228; }
+  .tip b:first-child, .warn b:first-child { color: var(--accent); }
+  .warn b:first-child { color: var(--warn); }
+  details { margin: 0.5rem 0; padding: 0.6rem 0.9rem; background: var(--panel2); border: 1px solid var(--line); border-radius: 8px; }
+  details[open] { padding-bottom: 0.8rem; }
+  summary { cursor: pointer; font-weight: 650; }
+  details > :not(summary):first-of-type { margin-top: 0.6rem; }
+  details > :last-child { margin-bottom: 0; }
+  footer { margin-top: 1.4rem; color: var(--dim); font-size: 0.88rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../">← M-Flasher</a>
+  <a class="get" href="../#download">Download</a>
+</nav>
+
+<h1>How to use M-Flasher</h1>
+<p class="lead">A step-by-step guide for the M-VAVE FM-1 and SMK-37 Pro / Elite. No technical knowledge needed. If something doesn't work, see <a href="#help">If something goes wrong</a>.</p>
+
+<div class="toc">
+  <ol>
+    <li><a href="#need">What you need</a></li>
+    <li><a href="#install">Install M-Flasher</a></li>
+    <li><a href="#connect">Connect your unit</a></li>
+    <li><a href="#backup">Make a backup first</a></li>
+    <li><a href="#firmware">Install a firmware</a></li>
+    <li><a href="#bootloader">Install m-bootloader</a></li>
+    <li><a href="#restore">Go back to a backup</a></li>
+    <li><a href="#done">When you're done</a></li>
+  </ol>
+</div>
+
+<section id="need">
+  <h2><span class="n">1</span>What you need</h2>
+  <ul>
+    <li>Your <b>FM-1</b> or <b>SMK-37 Pro / Elite</b>. The Fame MiniFM is an FM-1 under another name, and works the same.</li>
+    <li>A computer with <b>Windows 10 or 11</b>, <b>macOS 11 or newer</b>, or <b>Linux</b>.</li>
+    <li>A <b>USB cable that carries data</b>. Some cables only charge: if the computer never sees the unit, try another cable. Plug it straight into the computer, not through a hub or a dock.</li>
+    <li>If you want to install a firmware: its file, ending in <code>.fwsc</code>. Use it as you downloaded it. If it came inside a <code>.zip</code>, take the <code>.fwsc</code> out of it first.</li>
+  </ul>
+</section>
+
+<section id="install">
+  <h2><span class="n">2</span>Install M-Flasher</h2>
+  <p>Get it from the <a href="../#download">download page</a>: it picks the right file for your computer. Then follow the steps for your system.</p>
+  <details id="install-windows">
+    <summary>Windows</summary>
+    <ol>
+      <li>Right-click the downloaded <code>.zip</code> and choose <b>Extract All</b>.</li>
+      <li>Open the folder and double-click <b>M-Flasher.exe</b>.</li>
+      <li>If Windows says <b>"Windows protected your PC"</b>, click <b>More info</b>, then <b>Run anyway</b>. It says this because the app isn't signed yet.</li>
+      <li>Later, when M-Flasher finds your unit, Windows asks whether to let it make changes: click <b>Yes</b>. M-Flasher needs this only to talk to the unit.</li>
+    </ol>
+    <p>If Windows Security deletes it, see <a href="#help-defender">If something goes wrong</a>.</p>
+  </details>
+  <details id="install-mac">
+    <summary>macOS</summary>
+    <ol>
+      <li>Open the downloaded <code>.dmg</code> and drag <b>M-Flasher</b> into <b>Applications</b>.</li>
+      <li>Open M-Flasher from Applications. The first time, macOS refuses because the app isn't signed with an Apple certificate: close the message, open <b>System Settings → Privacy &amp; Security</b>, scroll down, and click <b>Open Anyway</b>.</li>
+      <li>When M-Flasher finds your unit, it asks for <b>your Mac's password</b>, and macOS asks once whether M-Flasher may access a <b>removable volume</b> (that's the unit): click <b>Allow</b>.</li>
+    </ol>
+    <p>Start M-Flasher soon after you connect the unit: if it waits too long, macOS can take the unit out of download mode after about half a minute. Just connect it again.</p>
+  </details>
+  <details id="install-linux">
+    <summary>Linux</summary>
+    <ul>
+      <li><b>Ubuntu, Debian, Linux Mint, Raspberry Pi OS:</b> in a terminal, in the folder with the file, run <code>sudo apt install ./m-flasher_…_amd64.deb</code> (the name of the file you downloaded).</li>
+      <li><b>Fedora, RHEL, openSUSE:</b> <code>sudo dnf install ./m-flasher-….rpm</code>, or on openSUSE <code>sudo zypper install ./m-flasher-….rpm</code>.</li>
+      <li><b>Other distributions:</b> extract the <code>.tar.gz</code> and follow its <code>README.txt</code>.</li>
+    </ul>
+    <p>Then connect the unit (unplug and plug it in again if it was connected), and start M-Flasher from your app menu. Start it as yourself, not with <code>sudo</code>.</p>
+  </details>
+</section>
+
+<section id="connect">
+  <h2><span class="n">3</span>Connect your unit</h2>
+  <p>M-Flasher talks to your unit in its <b>download mode</b>, a special mode built into its chip that works even when the firmware is broken. How to get there depends on what your unit runs now. Pick the first one that fits:</p>
+  <ul>
+    <li><b>It works normally:</b> switch it on, connect it, and start M-Flasher. Under <span class="ui">HOW TO CONNECT</span>, M-Flasher shows your unit with a <span class="ui">DOWNLOAD MODE</span> button. Click it, and the unit restarts into download mode by itself.</li>
+    <li><b>It has m-bootloader:</b> hold <kbd>REC</kbd> (on the SMK-37: <kbd>SEQ REC</kbd>) while you switch it on.</li>
+    <li><b>It runs Felucca, SLOOP or Snoop37:</b> hold <kbd>OCT−</kbd> and <kbd>OCT+</kbd> together for 5 seconds.</li>
+    <li><b>Its firmware doesn't start:</b> it's often in download mode already. Just connect it.</li>
+  </ul>
+  <p>M-Flasher finds the unit by itself, reads it for a second or two, and shows <span class="ui">USB CONNECTED · DOWNLOAD MODE</span> with the model, the firmware and the bootloader.</p>
+  <p class="tip"><b>That's normal:</b> in download mode the unit's own screen doesn't change, and nothing new appears in Explorer or Finder.</p>
+  <p class="warn"><b>Original M-VAVE unit?</b> With M-VAVE's own bootloader and firmware, no key combination gets you into download mode: use the <span class="ui">DOWNLOAD MODE</span> button.</p>
+</section>
+
+<section id="backup">
+  <h2><span class="n">4</span>Make a backup first</h2>
+  <ol>
+    <li>Click <span class="ui">BACKUP FULL FLASH</span>.</li>
+    <li>Click <span class="ui">SAVE FULL BACKUP</span>. It takes a second or two.</li>
+  </ol>
+  <p>The backup holds everything on the unit: firmware, settings, presets, sounds and its factory calibration. Backups go to <b>Documents → M-Flasher → backups</b>, and the <span class="ui">BACKUPS</span> link at the top of the window opens that folder.</p>
+  <p class="tip"><b>Good to know:</b> M-Flasher also saves a backup by itself before every change it makes, so you can always go back. Keep a copy of your first backup somewhere safe.</p>
+</section>
+
+<section id="firmware">
+  <h2><span class="n">5</span>Install a firmware</h2>
+  <ol>
+    <li>Click <span class="ui">FLASH FIRMWARE</span>.</li>
+    <li>Click <span class="ui">CHOOSE FILE</span> and pick the <code>.fwsc</code> file. The map on the right marks what will change.</li>
+    <li>Click <span class="ui">REVIEW &amp; FLASH</span>. A summary shows what will be written, with a warning if something needs your attention.</li>
+    <li>Click <span class="ui">WRITE … SECTORS</span>. It takes about ten seconds. <b>Don't unplug or switch off the unit</b> until it says it's done.</li>
+  </ol>
+  <p>Your settings, presets and Bluetooth pairings stay as they are, and so does the unit's bootloader. M-Flasher checks that the file is for your model before it writes anything.</p>
+  <p class="tip"><b>Switching to a very different firmware?</b> Settings saved by the old one can confuse the new one, and M-Flasher warns you. To go back to the old firmware cleanly, restore a backup made while it was installed.</p>
+  <p class="warn"><b>FM-1 sold from late 2026?</b> These have a newer memory chip, shown as <b>(new)</b> next to <span class="ui">FLASH CHIP</span>. Some custom firmwares made before it came out don't fully work on it, for example not keeping settings. Check with the firmware's author before installing it.</p>
+</section>
+
+<section id="bootloader">
+  <h2><span class="n">6</span>Install m-bootloader <span style="color:var(--dim);font-weight:400;font-size:1rem">(recommended)</span></h2>
+  <p>The bootloader is the small program that starts your unit. <b>m-bootloader</b> replaces M-VAVE's with one that has a recovery menu, so you can always get back into download mode from the unit's keys, even if a firmware stops working.</p>
+  <ul>
+    <li><b>Download mode:</b> hold <kbd>REC</kbd> (SMK-37: <kbd>SEQ REC</kbd>) while switching on.</li>
+    <li><b>Recovery menu:</b> hold <kbd>PLAY</kbd> (SMK-37: <kbd>SEQ PLAY</kbd>) while switching on.</li>
+  </ul>
+  <h3>How to install it</h3>
+  <p>When M-Flasher sees M-VAVE's original bootloader, it asks <b>"Install m-bootloader?"</b>. Click <span class="ui">YES</span>, look over the summary, and click <span class="ui">WRITE … SECTORS</span>.</p>
+  <p>Or any time: click <span class="ui">FLASH BOOTLOADER</span>, leave <span class="ui">M-BOOTLOADER</span> selected, click <span class="ui">REVIEW &amp; FLASH</span>, then <span class="ui">WRITE … SECTORS</span>.</p>
+  <p class="tip"><b>After an official M-VAVE update:</b> M-VAVE's updater puts its own bootloader back. Install m-bootloader again afterwards.</p>
+  <details>
+    <summary>Going back to M-VAVE's bootloader</summary>
+    <p>Click <span class="ui">FLASH BOOTLOADER</span>, choose <span class="ui">STOCK (FROM .FWSC)</span>, and pick an <b>official M-VAVE firmware file</b> for your model. Custom firmware files won't work for this.</p>
+  </details>
+</section>
+
+<section id="restore">
+  <h2><span class="n">7</span>Go back to a backup</h2>
+  <ol>
+    <li>Click <span class="ui">RESTORE FULL FLASH</span>.</li>
+    <li>Pick a backup from the list, or click <span class="ui">CHOOSE FILE</span> to find one.</li>
+    <li>Click <span class="ui">REVIEW &amp; RESTORE</span>, then <span class="ui">WRITE … SECTORS</span>.</li>
+  </ol>
+  <p>Only what's different is written, and the unit comes back exactly as it was when you made the backup.</p>
+  <p class="tip"><b>Restoring an old backup?</b> Tick <b>Keep this unit's bootloader</b> so a newer m-bootloader stays on the unit.</p>
+</section>
+
+<section id="done">
+  <h2><span class="n">8</span>When you're done</h2>
+  <p>Unplug the unit, then switch it off and on again. It starts with its firmware as usual.</p>
+</section>
+
+<section id="help">
+  <h2>If something goes wrong</h2>
+  <details id="help-not-found">
+    <summary>M-Flasher doesn't find my unit</summary>
+    <ul>
+      <li>Check the unit is in download mode (see <a href="#connect">Connect your unit</a>). Its screen not changing is normal.</li>
+      <li>Try another USB cable: many cables only charge.</li>
+      <li>Plug it straight into the computer, not through a hub or dock, and try another USB port.</li>
+      <li>Connect only one unit at a time.</li>
+      <li>Switch the unit off and on, and put it in download mode again.</li>
+      <li>On Linux, if M-Flasher says to run <code>sudo modprobe sg</code>, do that in a terminal.</li>
+    </ul>
+  </details>
+  <details id="help-mac-midi">
+    <summary>On a Mac, there's no DOWNLOAD MODE button although the unit is on</summary>
+    <p>Your Mac may remember the unit under an old name from an earlier firmware. Unplug the unit, open <b>Audio MIDI Setup</b> (in Applications → Utilities), choose <b>Window → Show MIDI Studio</b>, select the greyed-out entry for your unit (it may be called "USB Composite Device"), and press <kbd>Delete</kbd>. Then plug the unit in again.</p>
+  </details>
+  <details id="help-defender">
+    <summary>Windows Security says M-Flasher is a threat, or deleted it</summary>
+    <p>That's a false alarm, which sometimes happens to a new release because it isn't signed yet. It's reported to Microsoft each time and usually clears within a few days. If you can't wait, and you downloaded it from the download page here (it comes from M-Flasher's releases on GitHub):</p>
+    <ol>
+      <li>Open <b>Windows Security → Virus &amp; threat protection → Protection history</b> and pick the M-Flasher entry.</li>
+      <li>If it says <b>Threat quarantined</b>: <b>Actions → Restore</b>. If Windows finds it again, choose <b>Allow on device</b>.</li>
+      <li>If it says <b>Threat blocked</b>: <b>Actions → Allow</b>, then download it again.</li>
+    </ol>
+  </details>
+  <details id="help-bad-config">
+    <summary>The unit's screen shows BAD CONFIG</summary>
+    <p>An older m-bootloader doesn't understand what a newer official FM-1 update left behind. Choose <b>Boot app</b> in its menu to start the firmware, then install the m-bootloader that comes with M-Flasher (see <a href="#bootloader">step 6</a>).</p>
+  </details>
+  <details id="help-failed-5">
+    <summary>M-VAVE's updater, or a firmware's "return to official" option, stops with FAILED -5</summary>
+    <p>That can happen on a unit with m-bootloader: M-VAVE's updater on an SMK-37 running a custom firmware, or Melodee's <b>Return to official V15</b>, for example. Nothing was changed. Use M-Flasher instead: restore a backup, or install the firmware and then put M-VAVE's bootloader back (see <a href="#bootloader">step 6</a>).</p>
+  </details>
+  <details id="help-slow">
+    <summary>It's very slow</summary>
+    <p>Some USB ports are much slower with the unit. Try another one: a port at the back of a desktop computer, next to the video outputs, is often faster. M-Flasher suggests this too when it notices.</p>
+  </details>
+  <details id="help-other">
+    <summary>Something else</summary>
+    <p>Ask in the <a href="https://github.com/jvitkauskas/m-flasher/issues">issues on GitHub</a>, and copy what M-Flasher's <span class="ui">OPERATION LOG</span> says. Your backups stay in Documents → M-Flasher → backups whatever happens.</p>
+  </details>
+</section>
+
+<footer>
+  <p>More details, including the command line: the <a href="https://github.com/jvitkauskas/m-flasher/blob/main/docs/usage.md">technical guide</a>. M-Flasher is free and open source, and not affiliated with M-VAVE or JieLi.</p>
+</footer>
+
+<script>
+  // Open the install steps for this computer's system.
+  (() => {
+    const ua = navigator.userAgent, p = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+    const id = /Win/i.test(p) || /Windows/.test(ua) ? "install-windows"
+      : (/Mac/i.test(p) || /Macintosh/.test(ua)) && navigator.maxTouchPoints <= 1 ? "install-mac"
+      : /Linux|X11|CrOS/i.test(p + " " + ua) && !/Android/i.test(ua) ? "install-linux" : null;
+    if (id) document.getElementById(id).open = true;
+    // A link to a question opens it.
+    const openTarget = () => { const t = location.hash && document.getElementById(location.hash.slice(1)); if (t && t.tagName === "DETAILS") t.open = true; };
+    window.addEventListener("hashchange", openTarget);
+    openTarget();
+  })();
+</script>
+</body>
+</html>
