@@ -126,6 +126,12 @@ th, td { text-align: left; padding: 0.4rem 0.55rem; border-bottom: 1px solid var
 .parts td:last-child { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: nowrap; }
 .parts td:first-child { text-align: center; }
 .more-link { color: var(--dim); margin-top: 1.25rem; }
+.watch { display: inline-flex; align-items: center; gap: 0.45rem; font-weight: 600; }
+.watch svg { width: 1.3em; height: 1.3em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+.video { margin: 1.5rem auto 0; max-width: 52rem; scroll-margin-top: 4.5rem; }
+.video .frame { position: relative; aspect-ratio: 16 / 9; border-radius: 1.25rem; overflow: hidden; background: #000; box-shadow: var(--shadow); }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video figcaption { text-align: center; color: var(--dim); font-size: 0.93rem; margin-top: 0.6rem; }
 
 /* make your own */
 .own { display: flex; flex-direction: column; }
