@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -154,10 +154,10 @@
   <h2>Make an m-card</h2>
   <p class="sub">A 30 × 25.2 mm, two-layer board that you can order online and solder by hand. It's public domain:
     order it, change it, sell it.</p>
-  <div class="renders">
-    <figure><img src="img/m-card-top.png" width="1000" height="773" alt="m-card from the top: two cable sockets, the parts and the microSD socket's pads"><figcaption>Top</figcaption></figure>
-    <figure><img src="img/m-card-bottom.png" width="1000" height="773" alt="m-card from the bottom"><figcaption>Bottom</figcaption></figure>
-  </div>
+  <figure class="board-photo">
+    <img src="img/m-card-photo.jpg" width="1000" height="831" alt="A hand-soldered m-card: the LCD cable socket top left, the J12 cable socket below it, the small parts in two rows top right, and the hinged microSD socket below them">
+    <figcaption>A hand-soldered m-card 1.0. From 1.1, R1 (marked 2200 here, lower row on the right) is 150 Ω.</figcaption>
+  </figure>
 
   <div class="build-steps">
     <article class="bstep">
@@ -170,9 +170,7 @@
         <li>Check these, and leave the rest as they are:
           <table class="settings">
             <tr><th>Layers</th><td>2</td></tr>
-            <tr><th>PCB Thickness</th><td>1.0 mm, so it sits lower under the cover. 1.6 mm is fine too.</td></tr>
             <tr><th>Surface Finish</th><td>HASL, the cheap default. It's the easiest to hand-solder.</td></tr>
-            <tr><th>Mark on PCB</th><td>Remove mark, if it's free</td></tr>
           </table></li>
         <li>Five boards is the smallest order. Add it to the cart and pay. Any other PCB maker that takes Gerbers
           works the same way.</li>
@@ -193,7 +191,7 @@
           <tr><td>1</td><td>74LVC1G04 inverter, SOT-23-5 (U1)</td><td>C7827</td></tr>
           <tr><td>5</td><td>47 kΩ, 0805</td><td>C17713</td></tr>
           <tr><td>2</td><td>470 Ω, 0805</td><td>C17710</td></tr>
-          <tr><td>1</td><td>220 Ω, 0805</td><td>C17557</td></tr>
+          <tr><td>1</td><td>150 Ω, 0805</td><td>C17471</td></tr>
           <tr><td>1</td><td>10 µF, 0805</td><td>C15850</td></tr>
           <tr><td>1</td><td>100 nF, 0805</td><td>C49678</td></tr>
         </tbody>

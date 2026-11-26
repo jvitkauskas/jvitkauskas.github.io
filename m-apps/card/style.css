@@ -107,10 +107,9 @@ main > section { margin: 3.5rem 0; scroll-margin-top: 4.5rem; }
 .do li::marker { color: var(--blue); font-weight: 700; }
 
 /* make an m-card */
-.renders { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0 0 1.5rem; }
-@media (max-width: 40rem) { .renders { grid-template-columns: 1fr; } }
-.renders figure { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 1.25rem; padding: 0.75rem; text-align: center; }
-.renders figcaption { color: #5a6574; font: 600 0.9rem var(--head); }
+.board-photo { max-width: 40rem; margin: 0 auto 1.5rem; text-align: center; }
+.board-photo img { display: block; width: 100%; height: auto; border-radius: 1.25rem; box-shadow: var(--shadow); }
+.board-photo figcaption { color: var(--dim); font: 600 0.9rem var(--head); margin-top: 0.6rem; }
 .build-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 @media (max-width: 52rem) { .build-steps { grid-template-columns: 1fr; } }
 .bstep { background: var(--panel); border: 1px solid var(--line); border-radius: 1.25rem; padding: 1.35rem 1.5rem; box-shadow: var(--shadow); min-width: 0; }
