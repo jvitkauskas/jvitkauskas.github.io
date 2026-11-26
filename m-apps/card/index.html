@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>m-card and m-apps: an SD card for the FM-1 and SMK-37</title>
+<meta name="description" content="m-card adds a microSD slot to the M-VAVE FM-1 or SMK-37 with no soldering to the unit. m-apps run from the card without touching the firmware you've installed. Free and open source.">
+<meta property="og:title" content="m-card and m-apps: an SD card for the FM-1 and SMK-37">
+<meta property="og:description" content="A microSD slot with no soldering to the unit, and apps that run from the card without touching your firmware.">
+<meta property="og:image" content="https://jvitkauskas.github.io/m-apps/card/img/card-hero.png">
+<meta property="og:url" content="https://jvitkauskas.github.io/m-apps/card/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="#"><span class="dot"></span>m-card <span class="plus">+</span> m-apps</a>
+  <nav>
+    <a href="#apps">Apps</a>
+    <a href="#start">Set up a card</a>
+    <a href="#build">Make an m-card</a>
+    <a href="#own">Make apps</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="hero-in">
+    <div class="hero-text">
+      <p class="kicker">For the M-VAVE FM-1 and SMK-37</p>
+      <h1>Your synth can have an SD&nbsp;card.</h1>
+      <p class="lede"><strong>m-card</strong> is a small board that adds a microSD slot, with no soldering to the unit.
+        <strong>m-apps</strong> are programs you start from that card. They run from memory, so the firmware you've
+        installed stays exactly as it is.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/jvitkauskas/m-apps/releases/latest/download/m-apps-sd-card.zip">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>
+          Download the starter card</a>
+        <a class="btn" href="#build">Make an m-card</a>
+      </div>
+      <p class="small">One zip for both units: the launcher and five apps. Free and open source.</p>
+    </div>
+    <figure class="hero-art">
+      <img src="img/card-hero.png" width="960" height="720" alt="An orange music gadget with a microSD card sliding into its side, app tiles on its screen and app icons floating up like bubbles">
+    </figure>
+  </div>
+</section>
+
+<main>
+
+<section class="how">
+  <h2>How it works</h2>
+  <ol class="steps3">
+    <li>
+      <span class="num">1</span>
+      <h3>The board</h3>
+      <p>m-card sits inside the unit, between the screen's cable and the main board, and shares the screen's
+        connection. It plugs in: nothing is soldered to the unit.</p>
+    </li>
+    <li>
+      <span class="num">2</span>
+      <h3>The bootloader</h3>
+      <p>With <a href="https://github.com/jvitkauskas/m-bootloader">m-bootloader</a> on the unit, its menu gets an
+        <b>SD card</b> item. Hold <b>PLAY</b> (<b>SEQ PLAY</b> on the SMK-37) while switching on to open the menu.</p>
+    </li>
+    <li>
+      <span class="num">3</span>
+      <h3>The launcher</h3>
+      <p>SD card starts the m-apps launcher from the card: your apps as tiles over rising bubbles. Pick one and it
+        runs. Most of them go back to the launcher when you're done.</p>
+    </li>
+  </ol>
+  <div class="callout">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+    <p><b>Your firmware stays put.</b> Apps load into RAM and run from there. Switch the unit off and on and it starts
+      its own firmware, as always. The only apps that write flash are the ones whose job it is: Slots, when you load a
+      slot, and Unbricker, which writes the <i>broken</i> unit, not this one.</p>
+  </div>
+</section>
+
+<section id="apps">
+  <h2>On the starter card</h2>
+  <p class="sub">Every screen here is drawn by the app's own code.</p>
+  <div class="apps">
+    <article class="app">
+      <div class="shot"><img src="img/launcher.png" width="240" height="240" alt="The launcher: MP3 Player, Slots and Unbricker as tiles"></div>
+      <div><h3>Launcher</h3>
+        <p>Your apps as tiles, each with its icon, a line about it and its version. <b>OCT−/+</b> (or <b>&lt; &gt;</b>)
+          to move, <b>PLAY</b> to start.</p></div>
+    </article>
+    <article class="app">
+      <div class="shot"><img src="img/mp3.png" width="240" height="240" alt="The MP3 player: time, bitrate, an analyser and a playlist"></div>
+      <div><h3>MP3 Player</h3>
+        <p>A 90s-style player for the MP3 files in the card's root, with a playlist and an analyser.</p></div>
+    </article>
+    <article class="app">
+      <div class="shot"><img src="img/slots.png" width="240" height="240" alt="Slots: a list of saved firmware slots"></div>
+      <div><h3>Slots</h3>
+        <p>Keeps whole firmware images, and their settings, on the card, and swaps between them with no computer.
+          Name them on the keys.</p></div>
+    </article>
+    <article class="app">
+      <div class="shot"><img src="img/unbricker.png" width="240" height="240" alt="Unbricker: ready to repair"></div>
+      <div><h3>Unbricker</h3>
+        <p>Repairs a broken FM-1 or SMK-37 with this unit and a USB-C cable: it writes a fresh m-bootloader to the
+          other one. Also <a href="../unbricker/">in your browser</a>.</p></div>
+    </article>
+    <article class="app">
+      <div class="shot"><img src="img/usbdisk.png" width="240" height="240" alt="USB Disk: reading at 870 KB/s"></div>
+      <div><h3>USB Disk</h3>
+        <p>Shows the card to your computer as a USB drive, so you can copy files without opening the unit.</p></div>
+    </article>
+    <article class="app">
+      <div class="shot"><img src="img/wifi.png" width="240" height="240" alt="WiFi: two saved networks"></div>
+      <div><h3>WiFi</h3>
+        <p>Keeps the networks in <code>WIFI.TXT</code> and tests them, for the apps that go online. Add networks by
+          typing on the keys.</p></div>
+    </article>
+  </div>
+</section>
+
+<section id="start" class="panel">
+  <h2>Set up a card</h2>
+  <div class="two">
+    <div>
+      <h3>You need</h3>
+      <ul class="need">
+        <li>An FM-1 or SMK-37 with an <a href="#build">m-card</a> in it.</li>
+        <li><a href="https://github.com/jvitkauskas/m-bootloader/releases/latest">m-bootloader</a> 2.4 or newer on
+          the unit (3.0 is the latest). <a href="../flasher/">M-Flasher</a> installs it, and makes a backup first.</li>
+        <li>A microSD card, formatted <b>FAT32</b>. Cards over 32 GB usually come as exFAT, so format those first.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Then</h3>
+      <ol class="do">
+        <li><a href="https://github.com/jvitkauskas/m-apps/releases/latest/download/m-apps-sd-card.zip">Download
+          <code>m-apps-sd-card.zip</code></a> and unzip it.</li>
+        <li>Copy the <code>MBOOT</code> folder and <code>WIFI.TXT</code> to the card's root.</li>
+        <li>For WiFi, open <code>WIFI.TXT</code> and put in your network's name and password. Or add it later in
+          the WiFi app.</li>
+        <li>Put the card in, hold <b>PLAY</b> (<b>SEQ PLAY</b>) while switching on, and choose <b>SD card</b>.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="build">
+  <h2>Make an m-card</h2>
+  <p class="sub">A 30 × 25.2 mm, two-layer board that you can order online and solder by hand. It's public domain:
+    order it, change it, sell it.</p>
+  <div class="renders">
+    <figure><img src="img/m-card-top.png" width="1000" height="773" alt="m-card from the top: two cable sockets, the parts and the microSD socket's pads"><figcaption>Top</figcaption></figure>
+    <figure><img src="img/m-card-bottom.png" width="1000" height="773" alt="m-card from the bottom"><figcaption>Bottom</figcaption></figure>
+  </div>
+
+  <div class="build-steps">
+    <article class="bstep">
+      <span class="num">1</span>
+      <h3>Order the board from JLCPCB</h3>
+      <ol class="do">
+        <li><a class="dl" href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-gerbers.zip">Download <code>m-card-gerbers.zip</code></a>. Don't unzip it.</li>
+        <li>On <a href="https://jlcpcb.com">jlcpcb.com</a>, start a quote and choose <b>Add gerber file</b>. Pick the
+          zip: the size is read from it.</li>
+        <li>Check these, and leave the rest as they are:
+          <table class="settings">
+            <tr><th>Layers</th><td>2</td></tr>
+            <tr><th>PCB Thickness</th><td>1.0 mm, so it sits lower under the cover. 1.6 mm is fine too.</td></tr>
+            <tr><th>Surface Finish</th><td>HASL, the cheap default. It's the easiest to hand-solder.</td></tr>
+            <tr><th>Mark on PCB</th><td>Remove mark, if it's free</td></tr>
+          </table></li>
+        <li>Five boards is the smallest order. Add it to the cart and pay. Any other PCB maker that takes Gerbers
+          works the same way.</li>
+      </ol>
+    </article>
+    <article class="bstep">
+      <span class="num">2</span>
+      <h3>Buy the parts</h3>
+      <p>All of them are at <a href="https://www.lcsc.com">LCSC</a>: search for the part numbers. A few spare
+        resistors and capacitors are handy.</p>
+      <div class="scroll">
+      <table class="parts">
+        <thead><tr><th>Qty</th><th>Part</th><th>LCSC</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Hirose DM3CS-SF hinged microSD socket (J1)</td><td>C202111</td></tr>
+          <tr><td>1</td><td>10-pin 0.5 mm FPC socket, <b>bottom</b> contact (J2)</td><td>C2856798</td></tr>
+          <tr><td>1</td><td>10-pin 0.5 mm FPC socket, <b>top</b> contact (J3)</td><td>C3446068</td></tr>
+          <tr><td>1</td><td>74LVC1G04 inverter, SOT-23-5 (U1)</td><td>C7827</td></tr>
+          <tr><td>5</td><td>47 kΩ, 0805</td><td>C17713</td></tr>
+          <tr><td>2</td><td>470 Ω, 0805</td><td>C17710</td></tr>
+          <tr><td>1</td><td>220 Ω, 0805</td><td>C17557</td></tr>
+          <tr><td>1</td><td>10 µF, 0805</td><td>C15850</td></tr>
+          <tr><td>1</td><td>100 nF, 0805</td><td>C49678</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note">Also a 10-pin, 0.5 mm FFC cable about 80 mm long, contacts on the same side at both ends
+        ("type A"), thin double-sided tape, and a microSD card.</p>
+    </article>
+    <article class="bstep">
+      <span class="num">3</span>
+      <h3>Solder it</h3>
+      <p>Print the <a href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-assembly.pdf">assembly
+        guide</a>: every part's place, value and direction at 5:1, and an order to solder them in. Every part is
+        hand-solderable with a fine tip. The two cable sockets are the fiddly part: plenty of flux, tack one tab,
+        drag-solder the row.</p>
+      <p class="note">Before you fit it, check with a multimeter that 3.3 V (J2 line 7) isn't shorted to ground
+        (line 1). Or have JLC assemble it: the <a href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-bom.csv">BOM</a>
+        and <a href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-cpl.csv">placement</a> files
+        are in their format.</p>
+    </article>
+    <article class="bstep">
+      <span class="num">4</span>
+      <h3>Fit it</h3>
+      <ol class="do">
+        <li>Open the unit and disconnect the battery.</li>
+        <li>Unplug the screen's cable from the main board, and plug it into the board's <b>J3</b>, contacts up.</li>
+        <li>Connect the main board's screen socket to the board's <b>J2</b> with the short cable, contacts down at J2.</li>
+        <li>Tape the board down. In the FM-1 it goes under the audio jacks: print the
+          <a href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-template-1to1.pdf">paper template</a>
+          at actual size to see where.</li>
+      </ol>
+      <p class="note">The silkscreen by each socket repeats which way the contacts face. Opening the unit is at your
+        own risk.</p>
+    </article>
+  </div>
+  <p class="more-link">Everything about the board, how it works and how to change it is in
+    <a href="https://github.com/jvitkauskas/m-card">the m-card repository</a>.</p>
+</section>
+
+<section id="own" class="panel own">
+  <div class="own-text">
+    <h2>Make your own apps</h2>
+    <p>m-apps is also a kit. Write an app in Rust, build it with <code>make</code>, and give it a folder in
+      <code>/MBOOT/APPS</code>: the launcher finds it. The same file runs from the card, over MIDI, or from a
+      computer with M-Flasher's <code>run-ram</code>.</p>
+    <p>The kit has the screen, the keys, sound, the card and its FAT32, USB and WiFi. One build can run on both
+      units.</p>
+<pre><code>#![no_std]
+use kit::board::{board_init, board_keys, board_restore};
+use kit::{app, display::line, platform::hal_delay_us};
+
+kit::app!(main);
+
+fn main(_lsb_mhz: u32) -> i32 {
+    let board = app::board(); // 1: FM-1, 2: SMK-37
+    if board == 0 { return 1; }
+    board_init(board == 2);
+    if kit::display::init(board) {
+        line(1, 0x07e0, b"HELLO FROM THE CARD");
+        line(3, 0xffff, b"ANY KEY: BACK");
+    }
+    while board_keys() != 0 { hal_delay_us(1000); } // let go of PLAY
+    while board_keys() == 0 {
+        app::feed(); // the watchdog
+        hal_delay_us(1000);
+    }
+    board_restore();
+    0 // back to the launcher
+}</code></pre>
+    <p><a class="btn" href="https://github.com/jvitkauskas/m-apps#build">Start with the README</a>
+      <span class="small">Writing apps with an AI agent? <a href="https://github.com/jvitkauskas/m-apps/blob/main/AGENTS.md">AGENTS.md</a>
+      has the loop, the rules and the traps found so far.</span></p>
+  </div>
+  <figure class="own-art"><img src="img/make-your-own.png" width="960" height="360" alt="A laptop with code, a dashed arrow to a microSD card, and on to the gadget showing a new app tile"></figure>
+</section>
+
+</main>
+
+<footer>
+  <p><a href="https://github.com/jvitkauskas/m-card">m-card</a> (CC0) ·
+    <a href="https://github.com/jvitkauskas/m-apps">m-apps</a> (MIT) ·
+    <a href="https://github.com/jvitkauskas/m-bootloader">m-bootloader</a> ·
+    <a href="../flasher/">M-Flasher</a> ·
+    <a href="../unbricker/">M-Unbricker</a></p>
+  <p>Unofficial: not affiliated with M-VAVE. Back up your unit with M-Flasher before trying new things.</p>
+</footer>
+
+</body>
+</html>
