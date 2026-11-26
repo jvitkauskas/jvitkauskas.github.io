@@ -98,6 +98,11 @@ main > section { margin: 3.5rem 0; scroll-margin-top: 4.5rem; }
 .app p { margin: 0; color: var(--dim); font-size: 0.97rem; }
 .app h3 { margin-bottom: 0.2rem; }
 
+/* firmware that uses the card */
+.fw { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 52rem) { .fw { grid-template-columns: 1fr; } }
+.fw .note { margin: 0; }
+
 /* set up a card */
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
 @media (max-width: 52rem) { .two { grid-template-columns: 1fr; gap: 0.5rem; } }

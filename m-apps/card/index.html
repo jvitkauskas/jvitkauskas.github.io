@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 
@@ -22,6 +22,7 @@
   <a class="brand" href="#"><span class="dot"></span>m-card <span class="plus">+</span> m-apps</a>
   <nav>
     <a href="#apps">Apps</a>
+    <a href="#firmware">Firmware</a>
     <a href="#start">Set up a card</a>
     <a href="#build">Make an m-card</a>
     <a href="#own">Make apps</a>
@@ -122,6 +123,28 @@
       <div><h3>WiFi</h3>
         <p>Keeps the networks in <code>WIFI.TXT</code> and tests them, for the apps that go online. Add networks by
           typing on the keys.</p></div>
+    </article>
+  </div>
+</section>
+
+<section id="firmware">
+  <h2>Firmware that uses the card</h2>
+  <p class="sub">The card isn't only for apps. Firmware is starting to use it too, while it runs: to load samples
+    and to save your work.</p>
+  <div class="fw">
+    <article class="bstep">
+      <h3>Optimist</h3>
+      <p>An open firmware for the FM-1. From version 0.3, its <a href="https://w0ts.github.io/optimist/webapp/builder/">Builder</a>
+        has an <b>SD card mode</b>: turn it on, build and install. Projects, presets, kits and samples then live on
+        the card, and samples play straight from it.</p>
+      <p class="note"><a href="https://w0ts.github.io/optimist/webapp/sd-card/">Optimist's SD card page</a></p>
+    </article>
+    <article class="bstep">
+      <h3>fm1-base</h3>
+      <p>A base for building your own firmware. Put <code>sd = true</code> in your firmware's <code>fm1.toml</code>,
+        and it can read and write files on the card. <code>msc = true</code> adds a USB drive mode.</p>
+      <p class="note"><a href="https://github.com/charlesvestal/fm1-base">fm1-base on GitHub</a> and its
+        <a href="https://github.com/charlesvestal/fm1-base/blob/main/docs/SD.md">SD card notes</a></p>
     </article>
   </div>
 </section>
