@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -38,12 +38,14 @@
         <strong>m-apps</strong> are programs you start from that card. They run from memory, so the firmware you've
         installed stays exactly as it is.</p>
       <div class="actions">
-        <a class="btn primary" href="https://github.com/jvitkauskas/m-apps/releases/latest/download/m-apps-sd-card.zip">
+        <a class="btn primary" href="#build">Make an m-card
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg></a>
+        <a class="btn" href="https://github.com/jvitkauskas/m-apps/releases/latest/download/m-apps-sd-card.zip">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>
           Download the starter card</a>
-        <a class="btn" href="#build">Make an m-card</a>
       </div>
-      <p class="small">One zip for both units: the launcher and five apps. Free and open source.</p>
+      <p class="small">Order the board ready-made or solder it yourself. The starter card is one zip for both units:
+        the launcher and five apps. Free and open source.</p>
     </div>
     <figure class="hero-art">
       <img src="img/card-hero.png" width="960" height="720" alt="An orange music gadget with a microSD card sliding into its side, app tiles on its screen and app icons floating up like bubbles">
@@ -152,14 +154,64 @@
 
 <section id="build">
   <h2>Make an m-card</h2>
-  <p class="sub">A 30 × 25.2 mm, two-layer board that you can order online and solder by hand. It's public domain:
-    order it, change it, sell it.</p>
+  <p class="sub">A 30 × 25.2 mm, two-layer board. Order it with the parts already on, or bare to solder yourself.
+    It's public domain: order it, change it, sell it.</p>
   <figure class="board-photo">
-    <img src="img/m-card-photo.jpg" width="1000" height="831" alt="A hand-soldered m-card: the LCD cable socket top left, the J12 cable socket below it, the small parts in two rows top right, and the hinged microSD socket below them">
-    <figcaption>A hand-soldered m-card 1.0. From 1.1, R1 (marked 2200 here, lower row on the right) is 150 Ω.</figcaption>
+    <img src="img/m-card-photo.jpg" width="1000" height="831" alt="An m-card as JLCPCB assembles it: the LCD cable socket top left, the J12 cable socket below it, the small parts in two rows top right, and the hinged microSD socket below them">
   </figure>
 
+  <div class="choose">
+    <h3>How do you want it?</h3>
+    <div class="choices">
+      <a class="choice" href="#assembled" data-path="assembled">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5M7 20a2 2 0 1 0 0-.01M18 20a2 2 0 1 0 0-.01"/></svg>
+        <b>Have it assembled</b>
+        <span>JLCPCB solders the parts on. You only fit it.</span></a>
+      <a class="choice" href="#diy" data-path="diy">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4 20 10M4 20l6-1 9-9-5-5-9 9-1 6Z"/></svg>
+        <b>Solder it yourself</b>
+        <span>Order bare boards and the parts, and solder them by hand.</span></a>
+    </div>
+  </div>
+
   <div class="build-steps">
+  <div id="assembled" class="path">
+    <h3 class="path-title">Have it assembled</h3>
+    <article class="bstep wide">
+      <span class="num">1</span>
+      <h3>Order it from JLCPCB, assembled</h3>
+      <ol class="do">
+        <li>Download <a class="dl" href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-gerbers.zip"><code>m-card-gerbers.zip</code></a> (don't unzip it),
+          and the parts list <a class="dl" href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-bom.csv"><code>m-card-bom.csv</code></a> and placement file
+          <a class="dl" href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-cpl.csv"><code>m-card-cpl.csv</code></a>.</li>
+        <li>On <a href="https://jlcpcb.com">jlcpcb.com</a>, start a quote and choose <b>Add gerber file</b>. Pick the
+          zip: the size is read from it. Check that <b>Surface Finish</b> is <b>HASL</b>, and leave the rest of the
+          board's settings as they are.</li>
+        <li>Switch on <b>PCB Assembly</b>, and set:
+          <table class="settings">
+            <tr><th>Assembly side</th><td><b>Assemble top side</b>. It's already chosen: all the parts are on the top.</td></tr>
+            <tr><th>PCBA Type</th><td><b>Economic</b>, not Standard.</td></tr>
+            <tr><th>PCBA Qty</th><td>It starts at the number of boards (5 is the least you can order), but you can
+              have just 2 of them assembled.</td></tr>
+          </table></li>
+        <li>Go on, and upload the parts list and the placement file when asked. Check each part's rotation in the
+          placement preview before you pay: JLC's parts library sometimes disagrees with the design's. The two cable
+          sockets and the card socket are "extended" parts, which adds a small fee for each.</li>
+      </ol>
+    </article>
+    <article class="bstep">
+      <span class="num">2</span>
+      <h3>Get the rest</h3>
+      <ul class="need">
+        <li>A 10-pin, 0.5 mm FFC cable about 80 mm long, with the contacts on the same side at both ends ("type A").</li>
+        <li>Thin double-sided tape.</li>
+        <li>A microSD card.</li>
+      </ul>
+    </article>
+  </div>
+
+  <div id="diy" class="path">
+    <h3 class="path-title">Solder it yourself</h3>
     <article class="bstep">
       <span class="num">1</span>
       <h3>Order the board from JLCPCB</h3>
@@ -167,13 +219,10 @@
         <li><a class="dl" href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-gerbers.zip">Download <code>m-card-gerbers.zip</code></a>. Don't unzip it.</li>
         <li>On <a href="https://jlcpcb.com">jlcpcb.com</a>, start a quote and choose <b>Add gerber file</b>. Pick the
           zip: the size is read from it.</li>
-        <li>Check these, and leave the rest as they are:
-          <table class="settings">
-            <tr><th>Layers</th><td>2</td></tr>
-            <tr><th>Surface Finish</th><td>HASL, the cheap default. It's the easiest to hand-solder.</td></tr>
-          </table></li>
-        <li>Five boards is the smallest order. Add it to the cart and pay. Any other PCB maker that takes Gerbers
-          works the same way.</li>
+        <li>Check that <b>Surface Finish</b> is <b>HASL</b>, the cheap default and the easiest to hand-solder. Leave
+          the rest as it is.</li>
+        <li>If you'll use solder paste, add a <b>stencil</b> to the order.</li>
+        <li>Five boards is the smallest order. Any other PCB maker that takes Gerbers works the same way.</li>
       </ol>
     </article>
     <article class="bstep">
@@ -203,17 +252,16 @@
     <article class="bstep">
       <span class="num">3</span>
       <h3>Solder it</h3>
-      <p>Print the <a href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-assembly.pdf">assembly
-        guide</a>: every part's place, value and direction at 5:1, and an order to solder them in. Every part is
-        hand-solderable with a fine tip. The two cable sockets are the fiddly part: plenty of flux, tack one tab,
-        drag-solder the row.</p>
+      <p>Print the <a href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-assembly.pdf">assembly guide</a>: every part's place, value and direction at
+        5:1, and an order to solder them in. Every part is hand-solderable with a fine tip. The two cable sockets are
+        the fiddly part: plenty of flux, tack one tab, drag-solder the row.</p>
       <p class="note">Before you fit it, check with a multimeter that 3.3 V (J2 line 7) isn't shorted to ground
-        (line 1). Or have JLC assemble it: the <a href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-bom.csv">BOM</a>
-        and <a href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-cpl.csv">placement</a> files
-        are in their format.</p>
+        (line 1).</p>
     </article>
-    <article class="bstep">
-      <span class="num">4</span>
+  </div>
+
+    <article class="bstep fit">
+      <span class="num"></span>
       <h3>Fit it</h3>
       <ol class="do">
         <li>Open the unit and disconnect the battery.</li>
@@ -230,6 +278,7 @@
         own risk.</p>
     </article>
   </div>
+  <div class="path-end">
   <figure id="video" class="video">
     <div class="frame">
       <iframe src="https://www.youtube-nocookie.com/embed/JvV_goEP3l4" title="m-card installation in FM-1"
@@ -239,6 +288,7 @@
     <figcaption>Fitting an m-card in an FM-1.
       <a href="https://youtu.be/JvV_goEP3l4">Watch on YouTube</a></figcaption>
   </figure>
+  </div>
   <p class="more-link">Everything about the board, how it works and how to change it is in
     <a href="https://github.com/jvitkauskas/m-card">the m-card repository</a>.</p>
 </section>
@@ -291,5 +341,27 @@ fn main(_lsb_mhz: u32) -> i32 {
   <p>Unofficial: not affiliated with M-VAVE. Back up your unit with M-Flasher before trying new things.</p>
 </footer>
 
+<script>
+// The two ways to make an m-card: show the one chosen. Without this, both show.
+(() => {
+  const build = document.getElementById('build');
+  build.classList.add('asking');
+  const pick = (path, scroll) => {
+    build.dataset.path = path;
+    for (const c of build.querySelectorAll('.choice')) c.setAttribute('aria-current', String(c.dataset.path === path));
+    if (scroll) document.querySelector('#' + path + ' .bstep').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  for (const c of build.querySelectorAll('.choice')) {
+    c.addEventListener('click', e => {
+      e.preventDefault();
+      pick(c.dataset.path, true);
+      history.replaceState(null, '', '#' + c.dataset.path);
+    });
+  }
+  const h = location.hash.slice(1);
+  if (h === 'assembled' || h === 'diy') pick(h, false);
+  else if (h === 'video') build.dataset.path = 'fit';
+})();
+</script>
 </body>
 </html>

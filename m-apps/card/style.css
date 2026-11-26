@@ -110,6 +110,31 @@ main > section { margin: 3.5rem 0; scroll-margin-top: 4.5rem; }
 .board-photo { max-width: 40rem; margin: 0 auto 1.5rem; text-align: center; }
 .board-photo img { display: block; width: 100%; height: auto; border-radius: 1.25rem; box-shadow: var(--shadow); }
 .board-photo figcaption { color: var(--dim); font: 600 0.9rem var(--head); margin-top: 0.6rem; }
+.choose { margin: 0 0 1.5rem; text-align: center; }
+.choose > h3 { font-size: 1.5rem; margin-bottom: 0.9rem; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 46rem; margin: 0 auto; }
+@media (max-width: 40rem) { .choices { grid-template-columns: 1fr; } }
+.choice { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: 1.3rem 1.2rem; text-decoration: none; color: var(--ink);
+  background: var(--panel); border: 2px solid var(--line); border-radius: 1.25rem; box-shadow: var(--shadow); transition: border-color 0.15s, transform 0.15s; }
+.choice:hover { border-color: var(--blue); transform: translateY(-1px); }
+.choice[aria-current="true"] { border-color: var(--blue); background: var(--blue-soft); }
+.choice svg { width: 2.4rem; height: 2.4rem; fill: none; stroke: var(--blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.choice b { font: 700 1.2rem var(--head); }
+.choice span { color: var(--dim); font-size: 0.95rem; }
+/* the paths' steps share one grid; with the script, only the chosen path (and then "Fit it") shows */
+.path { display: contents; }
+.path-title { grid-column: 1 / -1; font-size: 1.5rem; margin: 0.75rem 0 0; }
+#build.asking .path-title { display: none; }
+#build.asking .path, #build.asking .fit, #build.asking .path-end { display: none; }
+#build[data-path="assembled"] #assembled, #build[data-path="diy"] #diy { display: contents; }
+#build[data-path] .fit, #build[data-path] .path-end { display: block; }
+.bstep { scroll-margin-top: 5rem; }
+.bstep.wide { grid-column: 1 / -1; }
+/* "Fit it" comes after either path, so its number depends on the choice; without one it has none */
+.fit .num { display: none; }
+#build[data-path="assembled"] .fit .num, #build[data-path="diy"] .fit .num { display: inline-grid; }
+#build[data-path="assembled"] .fit .num::before { content: "3"; }
+#build[data-path="diy"] .fit .num::before { content: "4"; }
 .build-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 @media (max-width: 52rem) { .build-steps { grid-template-columns: 1fr; } }
 .bstep { background: var(--panel); border: 1px solid var(--line); border-radius: 1.25rem; padding: 1.35rem 1.5rem; box-shadow: var(--shadow); min-width: 0; }
