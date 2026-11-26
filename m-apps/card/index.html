@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 
@@ -91,7 +91,9 @@
   <p class="sub">Every screen here is drawn by the app's own code.</p>
   <div class="apps">
     <article class="app">
-      <div class="shot"><img src="img/launcher.png" width="240" height="240" alt="The launcher: MP3 Player, Slots and Unbricker as tiles"></div>
+      <div class="shot"><picture>
+        <source media="(prefers-reduced-motion: reduce)" srcset="img/launcher.png">
+        <img class="anim" src="img/launcher.webp" width="240" height="240" loading="lazy" alt="The launcher: the selection moves down MP3 Player, Slots, Unbricker, USB Disk and WiFi to Back, and up again, over rising bubbles"></picture></div>
       <div><h3>Launcher</h3>
         <p>Your apps as tiles, each with its icon, a line about it and its version. <b>OCT−/+</b> (or <b>&lt; &gt;</b>)
           to move, <b>PLAY</b> to start.</p></div>

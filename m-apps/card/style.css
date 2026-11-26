@@ -94,6 +94,9 @@ main > section { margin: 3.5rem 0; scroll-margin-top: 4.5rem; }
   overflow: hidden; box-shadow: var(--shadow); }
 .app .shot { display: grid; place-items: center; padding: 1.1rem; background: var(--blue-soft); }
 .app img { display: block; width: 100%; max-width: 240px; border-radius: 0.6rem; box-shadow: 0 4px 16px rgb(20 40 80 / 18%); }
+.app picture { display: block; width: 100%; max-width: 240px; }
+/* the animations are the screen's own 240 x 240 pixels: enlarged, they stay sharp */
+.app img.anim { image-rendering: pixelated; }
 .app > div:last-child { padding: 0.9rem 1.15rem 1.1rem; }
 .app p { margin: 0; color: var(--dim); font-size: 0.97rem; }
 .app h3 { margin-bottom: 0.2rem; }
