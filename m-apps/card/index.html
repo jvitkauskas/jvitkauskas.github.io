@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 
@@ -184,13 +184,13 @@
         <li>Download <a class="dl" href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-gerbers.zip"><code>m-card-gerbers.zip</code></a> (don't unzip it),
           and the parts list <a class="dl" href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-bom.csv"><code>m-card-bom.csv</code></a> and placement file
           <a class="dl" href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-cpl.csv"><code>m-card-cpl.csv</code></a>.</li>
-        <li>On <a href="https://jlcpcb.com">jlcpcb.com</a>, start a quote and choose <b>Add gerber file</b>. Pick the
-          zip: the size is read from it. Check that <b>Surface Finish</b> is <b>HASL</b>, and leave the rest of the
-          board's settings as they are.</li>
+        <li>On <a href="https://jlcpcb.com">jlcpcb.com</a>, press <b>Get Instant Quote</b>, then <b>Add gerber file</b>.
+          Pick the zip: the size is read from it. For <b>Surface Finish</b>, choose <b>HASL(with lead)</b> or
+          <b>LeadFree HASL</b>, and leave the rest of the board's settings as they are.</li>
         <li>Switch on <b>PCB Assembly</b>, and set:
           <table class="settings">
-            <tr><th>Assembly side</th><td><b>Assemble top side</b>. It's already chosen: all the parts are on the top.</td></tr>
             <tr><th>PCBA Type</th><td><b>Economic</b>, not Standard.</td></tr>
+            <tr><th>Assembly side</th><td><b>Assemble top side</b>. It's already chosen: all the parts are on the top.</td></tr>
             <tr><th>PCBA Qty</th><td>It starts at the number of boards (5 is the least you can order), but you can
               have just 2 of them assembled.</td></tr>
           </table></li>
@@ -217,10 +217,10 @@
       <h3>Order the board from JLCPCB</h3>
       <ol class="do">
         <li><a class="dl" href="https://github.com/jvitkauskas/m-card/releases/latest/download/m-card-gerbers.zip">Download <code>m-card-gerbers.zip</code></a>. Don't unzip it.</li>
-        <li>On <a href="https://jlcpcb.com">jlcpcb.com</a>, start a quote and choose <b>Add gerber file</b>. Pick the
-          zip: the size is read from it.</li>
-        <li>Check that <b>Surface Finish</b> is <b>HASL</b>, the cheap default and the easiest to hand-solder. Leave
-          the rest as it is.</li>
+        <li>On <a href="https://jlcpcb.com">jlcpcb.com</a>, press <b>Get Instant Quote</b>, then <b>Add gerber file</b>.
+          Pick the zip: the size is read from it.</li>
+        <li>For <b>Surface Finish</b>, choose <b>HASL(with lead)</b> or <b>LeadFree HASL</b>: they're the easiest to
+          hand-solder. Leave the rest as it is.</li>
         <li>If you'll use solder paste, add a <b>stencil</b> to the order.</li>
         <li>Five boards is the smallest order. Any other PCB maker that takes Gerbers works the same way.</li>
       </ol>
@@ -330,6 +330,21 @@ fn main(_lsb_mhz: u32) -> i32 {
   <figure class="own-art"><img src="img/make-your-own.png" width="960" height="360" alt="A laptop with code, a dashed arrow to a microSD card, and on to the gadget showing a new app tile"></figure>
 </section>
 
+<section id="support" class="support">
+  <h2>Support</h2>
+  <p>m-card and m-apps are free, like M-Flasher, m-bootloader and M-Unbricker. A donation helps pay for code signing
+    certificates, so the M-Flasher apps can start without security warnings: Apple's developer program alone costs
+    $99 every year.</p>
+  <div class="actions">
+    <a class="btn" href="https://github.com/sponsors/jvitkauskas">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg>
+      Sponsor on GitHub</a>
+    <a class="btn" href="https://ko-fi.com/jvitkauskas">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Zm12 2h1.5a2.5 2.5 0 0 1 0 5H16M8 3v2m4-2v2"/></svg>
+      Donate on Ko-fi</a>
+  </div>
+</section>
+
 </main>
 
 <footer>
@@ -337,7 +352,8 @@ fn main(_lsb_mhz: u32) -> i32 {
     <a href="https://github.com/jvitkauskas/m-apps">m-apps</a> (MIT) ·
     <a href="https://github.com/jvitkauskas/m-bootloader">m-bootloader</a> ·
     <a href="../flasher/">M-Flasher</a> ·
-    <a href="../unbricker/">M-Unbricker</a></p>
+    <a href="../unbricker/">M-Unbricker</a> ·
+    <a href="#support">Support</a></p>
   <p>Unofficial: not affiliated with M-VAVE. Back up your unit with M-Flasher before trying new things.</p>
 </footer>
 
